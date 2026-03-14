@@ -52,8 +52,10 @@ background:radial-gradient(circle at center,
 
 border:2px solid rgba(255,255,255,0.4);
 
+.spin{
 animation:spin 10s linear infinite;
-animation-play-state:paused;
+}
+  
 }
 
 .disk::after{
@@ -144,14 +146,15 @@ playBtn.onclick = function(){
       music.play();
       playBtn.innerHTML="⏸";
 
-      disk.style.animationPlayState="running";
+      disk.classList.add("spin");
 
-  } else {
+  } 
+  else {
 
       music.pause();
       playBtn.innerHTML="▶";
 
-      disk.style.animationPlayState="paused";
+      disk.classList.remove("spin");
 
   }
 

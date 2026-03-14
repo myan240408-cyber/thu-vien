@@ -125,21 +125,27 @@ font-size:16px;
 
 <button class="playBtn" id="playBtn">▶</button>
 
-<audio id="music" autoplay loop>
+<audio id="music" loop>
     <source src="bgm.mp3" type="audio/mpeg">
 </audio>
 
+</div>
+  
 <script>
 
 const music = document.getElementById("music");
 const playBtn = document.getElementById("playBtn");
 
-playBtn.onclick = function () {
+playBtn.addEventListener("click", function(){
 
-  if (music.paused) {
-      music.play();
-      playBtn.innerHTML = "⏸";
-  } else {
+  if(music.paused){
+      music.play().then(()=>{
+          playBtn.innerHTML = "⏸";
+      }).catch(err=>{
+          console.log(err);
+      });
+  } 
+  else{
       music.pause();
       playBtn.innerHTML = "▶";
   }

@@ -121,9 +121,15 @@ font-size:16px;
 
 <button class="playBtn" id="playBtn">▶</button>
 
-<audio controls autoplay loop>
-<source src="audio/bgm.mp3" type="audio/mpeg">
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+document.addEventListener("click", function(){
+  document.getElementById("music").play();
+});
+</script>
 
 </div>
 

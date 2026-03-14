@@ -137,26 +137,25 @@ const music = document.getElementById("music");
 const playBtn = document.getElementById("playBtn");
 const disk = document.getElementById("disk");
 
-playBtn.addEventListener("click", function(){
+playBtn.onclick = function(){
 
   if(music.paused){
 
       music.play();
-      playBtn.innerHTML = "⏸";
+      playBtn.innerHTML="⏸";
 
-      disk.style.animationPlayState = "running";
+      disk.style.animationPlayState="running";
 
-  } 
-  else{
+  } else {
 
       music.pause();
-      playBtn.innerHTML = "▶";
+      playBtn.innerHTML="▶";
 
-      disk.style.animationPlayState = "paused";
+      disk.style.animationPlayState="paused";
 
   }
 
-});
+}
 
 </script>
 

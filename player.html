@@ -130,40 +130,22 @@ font-size:16px;
 </audio>
 
 <script>
-document.addEventListener("click", function(){
-  document.getElementById("music").play();
-});
-</script>
 
-</div>
+const music = document.getElementById("music");
+const playBtn = document.getElementById("playBtn");
 
+playBtn.onclick = function () {
 
-<script>
+  if (music.paused) {
+      music.play();
+      playBtn.innerHTML = "⏸";
+  } else {
+      music.pause();
+      playBtn.innerHTML = "▶";
+  }
 
-const music=document.getElementById("music")
-const btn=document.getElementById("playBtn")
-const disk=document.getElementById("disk")
-
-btn.onclick=function(){
-
-if(music.paused){
-
-music.play()
-btn.innerHTML="⏸"
-disk.style.animationPlayState="running"
-
-}
-
-else{
-
-music.pause()
-btn.innerHTML="▶"
-disk.style.animationPlayState="paused"
-
-}
-
-}
-
+};
+  
 </script>
 
 </body>

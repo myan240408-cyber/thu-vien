@@ -135,23 +135,29 @@ font-size:16px;
 
 const music = document.getElementById("music");
 const playBtn = document.getElementById("playBtn");
+const disk = document.getElementById("disk");
 
 playBtn.addEventListener("click", function(){
 
   if(music.paused){
-      music.play().then(()=>{
-          playBtn.innerHTML = "⏸";
-      }).catch(err=>{
-          console.log(err);
-      });
+
+      music.play();
+      playBtn.innerHTML = "⏸";
+
+      disk.style.animationPlayState = "running";
+
   } 
   else{
+
       music.pause();
       playBtn.innerHTML = "▶";
+
+      disk.style.animationPlayState = "paused";
+
   }
 
-};
-  
+});
+
 </script>
 
 </body>

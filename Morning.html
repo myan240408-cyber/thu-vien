@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning - Fairy Garden</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+
+body{font-family:'Be Vietnam Pro',sans-serif;color:#e6fff2;min-height:100vh;background:linear-gradient(rgba(6,78,59,0.8),rgba(6,78,59,0.8)),url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070&auto=format&fit=crop');background-size:cover;padding:40px}
+
+.container{max-width:1000px;margin:auto}
+.filter-btn{padding:8px 18px;border-radius:20px;text-decoration:none;margin:5px;background:rgba(255,255,255,0.15);color:#e6fff2;border:1px solid rgba(255,255,255,0.3)}
+.filter-btn.active{background:#34d399;color:#064e3b}
+.card{background:rgba(255,255,255,0.1);padding:20px;border-radius:15px;margin-top:20px}
+
+.comment-section{
+  width: 650px;
+  margin: 50px auto;
+  text-align: left;
+  color: white;
+}
+
+.comment-section h3{
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+/* khung nhập */
+
+.comment-box{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.comment-box input{
+  flex: 1;
+  padding: 12px 15px;
+
+  border-radius: 15px;
+  border: none;
+  outline: none;
+
+  background: rgba(255,255,255,0.2);
+  color: white;
+  backdrop-filter: blur(5px);
+}
+
+.comment-box input::placeholder{
+  color: rgba(255,255,255,0.7);
+}
+
+/* nút gửi */
+
+.comment-box button{
+  padding: 12px 20px;
+  border-radius: 15px;
+  border: none;
+
+  background: #36d399;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.comment-box button:hover{
+  transform: scale(1.05);
+}
+
+/* comment hiển thị */
+
+#commentList p{
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(5px);
+
+  padding: 12px 15px;
+  border-radius: 15px;
+
+  margin-bottom: 10px;
+}
+
+.stars span {
+  font-size: 22px;
+  cursor: pointer;
+  color: gray;
+  display: inline-block;
+}
+
+.stars span:hover {
+  color: gold;
+}
+
+.average {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.story-img {
+  float: right;               /* QUAN TRỌNG: cho ảnh sang phải */
+  width: 220px;
+  height: 160px;
+  object-fit: cover;
+
+  margin-left: 15px;          /* tạo khoảng cách với chữ */
+  margin-bottom: 10px;
+
+  border-radius: 15px;        /* bo góc */
+  border: 4px solid white;    /* viền trắng */
+}
+
+.card {
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 25px;
+
+  overflow: hidden;           /* tránh lỗi vỡ layout khi dùng float */
+}
+
+.music-box{
+
+position: sticky;
+bottom: 30px;
+
+width: 600px;
+margin: 20px auto;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+padding:10px 15px;
+
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
+
+border-radius:15px;
+
+color:white;
+
+}
+
+/* phần bên trái */
+
+.music-left{
+
+flex:1;
+
+display:flex;
+flex-direction:column;
+
+}
+
+/* tên bài hát */
+
+.song-title{
+
+font-size:20px;
+margin-bottom:5px;
+
+}
+
+/* thanh audio */
+
+.music-left audio{
+
+width:70%;
+
+}
+
+/* đĩa nhạc */
+
+.music-disc{
+
+margin-left:20px;
+
+}
+
+.music-disc img{
+
+width:55px;
+height:55px;
+
+border-radius:50%;
+
+}
+
+/* animation quay */
+
+.spin{
+
+animation:spin 4s linear infinite;
+
+}
+
+@keyframes spin{
+
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+
+}
+
+#topBtn {
+  position: fixed;
+  bottom: 35px;
+  right: 35px;
+  z-index: 10000;
+
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #e6fff2;
+
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+
+  font-size: 20px;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  transition: 0.3s;
+}
+
+#topBtn:hover {
+  background: #34d399;
+  color: #064e3b;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(52,211,153,0.5);
+}
+
+</style>
+
+</head>
+<body>
+<div class="container">
+
+<h1> Đã đọc 🌅</h1>
+
+<div>
+<a href="index.html" class="filter-btn">Tổng hợp</a>
+<a href="morning.html" class="filter-btn active">Đã Đọc</a>
+<a href="nature.html" class="filter-btn">Sẽ Đọc</a>
+<a href="dreams.html" class="filter-btn">Đáng Đọc</a>
+</div>
+
+</div>
+
+<div class="card" data-id="truyen1">
+
+<img src="images/con-tim-rung-dong.jpg" alt="Con Tim Rung Động" class="story-img">
+
+<h2>Con Tim Rung Động</h2>
+<p>
+- Có rất nhiều lời được gửi gắm qua câu chuyện. Rất đáng suy ngẫm. Cuối truyện chắc là thông điệp: “Rời xa để trưởng thành” ? <br>
+- Mỗi nhân vật đều có câu chuyện riêng, khai thác rất trọn vẹn. Nét vẽ đẹp. <br>
+- Thể loại: @truyện tranh @ngôn tình @thanh xuân vườn trường @chậm nhiệt @TQ <br>
+- Nhân vật: Giang Ứng Lân, Địch Kì Nhi, Trương Tử Tầm, Tiêu Nhiên, Trác Nhất Dương, Tuyền nhi, Du Tư Niên, Phương Thục Dư, .... <br>
+</p>
+
+<!-- Phần đánh giá sao -->
+  <div class="stars">
+    <span onclick="rate('truyen1',1)">★</span>
+    <span onclick="rate('truyen1',2)">★</span>
+    <span onclick="rate('truyen1',3)">★</span>
+    <span onclick="rate('truyen1',4)">★</span>
+    <span onclick="rate('truyen1',5)">★</span>
+  </div>
+
+  <p class="average" id="avg-truyen1">Chưa có đánh giá</p>
+</div>
+
+</div>
+
+<div class="card" data-id="truyen2">
+
+<img src="images/ban-cung-ban-lam-toi-vo-tam-hoc-tap.jpg" alt="Bạn Cùng Bàn Làm Tôi Vô Tâm Học Tập" class="story-img">
+
+<h2>Bạn Cùng Bàn Làm Tôi Vô Tâm Học Tập</h2>
+<p>
+- Không định cho vào, nhưng đọc xong lại vã thanh xuân vườn trường quá, cứ nghĩ mãi. <br>
+- Bài học là “áp lực của số mệnh không thể chống lại, chỉ có thể vượt qua”. <br>
+- Chậm nhiệt nên tâm lí và quá trình thay đổi được tả rất kĩ. Không có bàn tay vàng. (edit: Bộ này câu chuyện đằng sau nhân vật nặng kinh, đọc khúc hai đứa chia tay đau xé lòng) <br>
+- Thể loại: @truyện chữ @đam mỹ @thanh xuân vườn trường @chậm nhiệt @TQ <br>
+- Nhân vật: Trì Dã, Văn Tiêu, Thiệu Quang Dục, Triệu Nhất Dương, Hứa Duệ, Nha Nha, Bà Ngoại (Lục Đông Thành), lão Hứa (Hứa Quang Khải), Trình Tiểu Ninh, … <br>
+*Dùng một câu viết nên mở đầu và kết thúc của một câu chuyện: <br>
+	“Sao cậu ở đây?” <br>
+	“Sao anh không ở đây?” <br>
+</p>
+
+<!-- Phần đánh giá sao -->
+  <div class="stars">
+    <span onclick="rate('truyen2',1)">★</span>
+    <span onclick="rate('truyen2',2)">★</span>
+    <span onclick="rate('truyen2',3)">★</span>
+    <span onclick="rate('truyen2',4)">★</span>
+    <span onclick="rate('truyen2',5)">★</span>
+  </div>
+
+  <p class="average" id="avg-truyen2">Chưa có đánh giá</p>
+</div>
+
+</p>
+
+</div>
+
+<div class="card" data-id="truyen3">
+
+<img src="images/qua-doi-diu-dang.jpg" alt="Quá Đỗi Dịu Dàng" class="story-img">
+
+  <h2>Quá Đỗi Dịu Dàng</h2>
+  <p>
+- Vô tình kiếm được mà hay xuất sắc. <br>
+- “..." (chưa có nên không ghi ;-;) <br>
+- Truyện ngọt tới mực ngộp đường, hành văn chuẩn học sinh giỏi văn VN. <br>
+- Thể loại: @truyện chữ @ngôn tình @ thanh xuân vườn trường @chậm nhiệt @VN <br>
+- Nhân vật: Trần Minh Nhật, Nguyễn Huyền Vi, Kiều, Trâm, Minh, Dũng, Tuấn, ba Vi, cô Tư, bà Diễm (mẹ Nhật), anh Đăng, Thảo, Tuyết, Nam, Ly, Trung, ... <br>
+</p>
+
+  <!-- Phần đánh giá sao -->
+  <div class="stars">
+    <span onclick="rate('truyen3',1)">★</span>
+    <span onclick="rate('truyen3',2)">★</span>
+    <span onclick="rate('truyen3',3)">★</span>
+    <span onclick="rate('truyen3',4)">★</span>
+    <span onclick="rate('truyen3',5)">★</span>
+  </div>
+
+  <p class="average" id="avg-truyen3">Chưa có đánh giá</p>
+</div>
+
+<div class="card" data-id="truyen4">
+
+<img src="images/dap-noi-ban-sat-di-hoc.jpg" alt="Đập Nồi Bán Sắt Đi Học" class="story-img">
+
+  <h2>Đập Nồi Bán Sắt Đi Học</h2>
+  <p>
+- Đọc hai lần rồi và vẫn mê như lần đầu, nó bị cuốn. <br>
+- "..." (đọc lần 3 sẽ bổ sung) <br>
+- Đầu hài đuôi bi, phong cách không khác gì Châu Chặt Chém. <br>
+- Thể loại: @truyện chữ @ngôn tình @khoa học viễn tưởng @chậm nhiệt @TQ <br>
+- Nhân vật: Vệ Tam, Ứng Tinh Quyết, Kim Có Tiền, Ứng Thành Hà, Hoắc Sơn Tây (Tây Tây), Liêu Như Ninh (Thiếu gia Liêu), Lê Trạch, Shaw Eli, Quinley Eli, Cơ Sở Vũ, các chủ, Sơn Cung Dũng Nam, Sơn Cung Ba Nhận, Giải Ngữ Mạn, Ngư Thanh Hà, Ngư Thanh Phi, Công Nghi Giác, Hoắc Kiếm, .... <br>
+</p>
+
+<!-- Phần đánh giá sao -->
+  <div class="stars">
+    <span onclick="rate('truyen4',1)">★</span>
+    <span onclick="rate('truyen4',2)">★</span>
+    <span onclick="rate('truyen4',3)">★</span>
+    <span onclick="rate('truyen4',4)">★</span>
+    <span onclick="rate('truyen4',5)">★</span>
+  </div>
+
+  <p class="average" id="avg-truyen4">Chưa có đánh giá</p>
+</div>
+
+</div>
+
+<div class="comment-section">
+
+<h3>💬 Bình luận</h3>
+
+<div class="comment-box">
+    <input type="text" id="commentInput" placeholder="Viết bình luận của bạn...">
+    <button onclick="addComment()">Gửi</button>
+</div>
+
+<div id="commentList"></div>
+
+</div>
+
+<script>
+function addComment() {
+
+    var input = document.getElementById("commentInput");
+    var commentText = input.value.trim();
+
+    if (commentText === "") {
+        alert("Vui lòng nhập bình luận!");
+        return;
+    }
+
+    var newComment = document.createElement("div");
+    newComment.className = "comment-item";
+    newComment.textContent = commentText;
+
+    document.getElementById("commentList").appendChild(newComment);
+
+    input.value = "";
+}
+</script>
+<script>
+function rate(id, stars) {
+
+    let data = JSON.parse(localStorage.getItem(id)) || {
+        total: 0,
+        count: 0
+    };
+
+    data.total += stars;
+    data.count += 1;
+
+    localStorage.setItem(id, JSON.stringify(data));
+
+    updateAverage(id);
+}
+
+function updateAverage(id) {
+
+    let data = JSON.parse(localStorage.getItem(id));
+    if (!data) return;
+
+    let avg = (data.total / data.count).toFixed(1);
+
+    document.getElementById("avg-" + id).innerText =
+        "⭐ Điểm trung bình: " + avg + " (" + data.count + " lượt)";
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".card").forEach(card => {
+        let id = card.getAttribute("data-id");
+        if (id) updateAverage(id);
+    });
+});
+</script>
+
+
+<iframe src="player.html"
+style="
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+height:90px;
+border:none;
+z-index:9999;
+pointer-events:auto;
+">
+</iframe>
+
+<button onclick="topFunction()" id="topBtn">📖⬆</button>
+
+<script>
+
+let mybutton = document.getElementById("topBtn");
+
+window.onscroll = function() {
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 200) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+};
+
+function topFunction() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+</script>
+
+</body>
+</html>

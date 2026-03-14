@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title> THƯ VIỆN </title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Lora&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    h1 {
+    letter-spacing: 2px;
+    }
+
+    h1, h2 {
+    font-family: 'Playfair Display', serif;
+    }
+
+    body {
+      font-family: 'Lora', serif;
+      line-height: 1.7;
+      color: #e6fff2;
+      min-height: 100vh;
+      background: linear-gradient(rgba(6, 78, 59, 0.75), rgba(6, 78, 59, 0.75)),
+        url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      padding: 40px 20px;
+    }
+
+    .container { max-width: 1100px; margin: auto; }
+
+    header { text-align: center; margin-bottom: 50px; }
+
+    h1 { font-size: 48px; font-weight: 800; margin-bottom: 20px; }
+
+    header p { font-size: 18px; opacity: 0.9; margin-bottom: 25px; }
+
+    button {
+    font-family: inherit;
+    }
+
+    .btn {
+      background: #34d399;
+      color: #064e3b;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      margin: 5px;
+    }
+
+    .btn:hover { background: #10b981; transform: translateY(-3px); }
+
+    /* Category Buttons */
+   .categories {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+    .filter-btn {
+      font-family: 'Lora', serif;
+      background: rgba(255,255,255,0.15);
+      color: #e6fff2;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 10px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin: 5px;
+
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: #34d399;
+      color: #064e3b;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(52,211,153,0.5);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 80px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      transition: 0.3s;
+    }
+
+    .card:hover { transform: translateY(-5px); }
+
+    .card h2 { margin-bottom: 10px; font-size: 20px; font-weight: 600; }
+
+    .tag {
+      display: inline-block;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background: #34d399;
+      color: #064e3b;
+      margin-bottom: 10px;
+    }
+
+    .card p { font-size: 14px; opacity: 0.9; line-height: 1.6; margin-bottom: 15px; }
+
+    .about { text-align: center; max-width: 700px; margin: auto; margin-bottom: 60px; }
+
+    .about h2 { font-size: 28px; margin-bottom: 15px; }
+
+    footer { text-align: center; font-size: 14px; opacity: 0.8; margin-top: 40px; }
+
+.categories a{
+text-decoration: none;
+color: white;
+}
+
+a{
+text-decoration: none;
+color: inherit;
+}
+
+.comment-section{
+  width: 650px;
+  margin: 50px auto;
+  text-align: left;
+  color: white;
+}
+
+.comment-section h3{
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+/* khung nhập */
+
+.comment-box{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.comment-box input{
+  flex: 1;
+  padding: 12px 15px;
+
+  border-radius: 15px;
+  border: none;
+  outline: none;
+
+  background: rgba(255,255,255,0.2);
+  color: white;
+  backdrop-filter: blur(5px);
+}
+
+.comment-box input::placeholder{
+  color: rgba(255,255,255,0.7);
+}
+
+/* nút gửi */
+
+.comment-box button{
+  padding: 12px 20px;
+  border-radius: 15px;
+  border: none;
+
+  background: #36d399;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.comment-box button:hover{
+  transform: scale(1.05);
+}
+
+/* comment hiển thị */
+
+#commentList p{
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(5px);
+
+  padding: 12px 15px;
+  border-radius: 15px;
+
+  margin-bottom: 10px;
+}
+
+/* MUSIC PLAYER */
+
+.music-box{
+
+position: sticky;
+bottom: 30px;
+
+width: 600px;
+margin: 20px auto;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+padding:10px 15px;
+
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
+
+border-radius:15px;
+
+color:white;
+
+}
+
+/* phần bên trái */
+
+.music-left{
+
+flex:1;
+
+display:flex;
+flex-direction:column;
+
+}
+
+/* tên bài hát */
+
+.song-title{
+
+font-size:20px;
+margin-bottom:5px;
+
+}
+
+/* thanh audio */
+
+.music-left audio{
+
+width:70%;
+
+}
+
+/* đĩa nhạc */
+
+.music-disc{
+
+margin-left:20px;
+
+}
+
+.music-disc img{
+
+width:55px;
+height:55px;
+
+border-radius:50%;
+
+}
+
+/* animation quay */
+
+.spin{
+
+animation:spin 4s linear infinite;
+
+}
+
+@keyframes spin{
+
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+
+}
+
+#topBtn {
+  position: fixed;
+  bottom: 35px;
+  right: 35px;
+  z-index: 10000;
+
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #e6fff2;
+
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+
+  font-size: 20px;
+  cursor: pointer;
+
+  display: none;
+  transition: 0.3s;
+}
+
+#topBtn:hover {
+  background: #34d399;
+  color: #064e3b;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(52,211,153,0.5);
+}
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <h1> THƯ VIỆN 📗</h1>
+  <p> Một góc nhỏ thơm mùi sách và thật nhiều sự chill ✨</p>
+</header>
+
+<!-- Category Filter -->
+<div class="categories">
+
+<a class="filter-btn active" href="home.html">
+Tổng Hợp
+</a>
+
+<a class="filter-btn" href="Morning.html">
+Đã Đọc
+</a>
+
+<a class="filter-btn" href="Nature.html">
+Sẽ Đọc
+</a>
+
+<a class="filter-btn" href="Dreams.html">
+Đáng Đọc
+</a>
+
+</div>
+
+<section class="grid" id="postGrid">
+
+<div class="card" data-category="Đã Đọc">
+<span class="tag">Đã đọc</span>
+<h2>Những câu chuyện thủ thư đã đọc</h2>
+<p>Mỗi cuốn sách là một cuộc đời. Khi đọc sách, ta như được sống dưới nhiều thân phận khác nhau...</p>
+
+<a href="Morning.html" class="btn">Xem thêm</a>
+</div>
+
+<div class="card" data-category="Sẽ Đọc">
+<span class="tag">Sẽ đọc</span>
+<h2>Những cuốn sách thủ thư muốn đọc</h2>
+<p>Không ai đánh giá một cuốn sách qua trang bìa, nhưng bìa không đẹp thì ta không đọc</p>
+
+<a href="Nature.html" class="btn">Xem thêm</a>
+</div>
+
+<div class="card" data-category="Đáng đọc">
+<span class="tag">Đáng đọc</span>
+<h2>Những cuốn sách thủ thư muốn bạn đọc</h2>
+<p>Đọc sách là thú vui gây nghiện học thức nhất mà chúng ta có thể biết đến</p>
+
+<a href="Nature.html" class="btn">Xem thêm</a>
+</div>
+
+</section>
+
+<section class="about">
+  <h2> Về người thủ thư mọt sách🌸</h2>
+  <p> Xin chào những tín đồ của sách! Chào mừng các bạn đến với thư viện. Nơi đây có những tựa sách mà thủ thư tâm đắc.</p>
+</section>
+
+<footer>
+  © 2026 Thư Viện — Làm từ bột giấy 📖 và thật nhiều chất gây nghiện 💌
+</footer> 
+
+</div>
+
+<script>
+function filterPosts(category, button) {
+  const cards = document.querySelectorAll('.card');
+  const buttons = document.querySelectorAll('.filter-btn');
+
+  buttons.forEach(btn => btn.classList.remove('active'));
+  button.classList.add('active');
+
+  cards.forEach(card => {
+    if (category === 'all' || card.dataset.category === category) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+
+<script>
+function goToPage(page) {
+    window.location.href = page;
+}
+</script>
+
+<div class="comment-section">
+
+<h3>💬 Bình luận</h3>
+
+<div class="comment-box">
+    <input type="text" id="commentInput" placeholder="Viết bình luận của bạn...">
+    <button onclick="addComment()">Gửi</button>
+</div>
+
+<div id="commentList"></div>
+
+</div>
+
+<script>
+function addComment() {
+
+    var input = document.getElementById("commentInput");
+    var commentText = input.value.trim();
+
+    if (commentText === "") {
+        alert("Vui lòng nhập bình luận!");
+        return;
+    }
+
+    var newComment = document.createElement("div");
+    newComment.className = "comment-item";
+    newComment.textContent = commentText;
+
+    document.getElementById("commentList").appendChild(newComment);
+
+    input.value = "";
+}
+</script>
+
+<iframe src="player.html"
+style="
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+height:90px;
+border:none;
+z-index:9999;
+pointer-events:auto;
+">
+</iframe>
+
+<button onclick="topFunction()" id="topBtn">📖⬆</button>
+
+<script>
+
+let mybutton = document.getElementById("topBtn");
+
+window.onscroll = function() {
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+};
+
+function topFunction() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+</script>
+
+
+</body>
+</html>

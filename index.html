@@ -31,6 +31,7 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
+      background-repeat: no-repeat;
       padding: 40px 20px;
     }
 
@@ -100,7 +101,10 @@
 
     .card {
       background: rgba(255, 255, 255, 0.1);
+      
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      
       padding: 25px;
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
@@ -169,7 +173,9 @@ color: inherit;
 
   background: rgba(255,255,255,0.2);
   color: white;
+  
   backdrop-filter: blur(5px);
+  -webkit-backdrop-filter:blur(10px);
 }
 
 .comment-box input::placeholder{
@@ -211,9 +217,11 @@ color: inherit;
 
 .music-box{
 
-position: sticky;
+position: fixed;
 bottom: 30px;
-
+left: 50%;
+transform: translateX(-50%);
+  
 width: 600px;
 margin: 20px auto;
 
@@ -225,10 +233,12 @@ padding:10px 15px;
 
 background:rgba(255,255,255,0.15);
 backdrop-filter:blur(10px);
-
+-webkit-backdrop-filter:blur(10px);
+  
 border-radius:15px;
 
 color:white;
+z-index:9999;
 
 }
 
@@ -299,7 +309,9 @@ to{transform:rotate(360deg);}
   z-index: 10000;
 
   background: rgba(255,255,255,0.15);
+  
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   border: 1px solid rgba(255,255,255,0.3);
   color: #e6fff2;
